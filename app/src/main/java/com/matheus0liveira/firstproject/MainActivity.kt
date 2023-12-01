@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
 
         val result = 2 / 2
 
-        Log.i("Test", "Hello world")
+        Log.i("Test", "Hello world 2")
 
         setContentView(R.layout.activity_main)
     }
