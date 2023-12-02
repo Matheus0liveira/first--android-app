@@ -1,42 +1,41 @@
 package com.matheus0liveira.firstproject
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.matheus0liveira.firstproject.ui.theme.FirstProjectTheme
+import androidx.core.widget.doAfterTextChanged
+import android.view.View.OnClickListener
+import android.widget.TextView
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val result = 2 / 2
-
-        Log.i("Test", "Hello world 2")
-
         setContentView(R.layout.activity_main)
-    }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-            text = "Hello $name!",
-            modifier = modifier
-    )
-}
+        lateinit var emailValue: String
+        lateinit var passwordValue: String
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    FirstProjectTheme {
-        Greeting("Android")
+
+        val inputEmailText: EditText = findViewById(R.id.input_form_email)
+        val inputPasswordText: EditText = findViewById(R.id.input_form_password)
+        val submitBtn: Button = findViewById(R.id.btn_form_submit)
+
+        inputEmailText.doAfterTextChanged { emailValue = it.toString() }
+        inputPasswordText.doAfterTextChanged { passwordValue = it.toString() }
+        submitBtn.setOnClickListener{
+            Log.i("---SUBMIT---", "Email: $emailValue, password: $passwordValue")
+
+            val emailResult = findViewById<TextView>(R.id.email_result)
+            val passwordResult = findViewById<TextView>(R.id.password_result)
+
+            emailResult.text = emailValue
+            passwordResult.text = passwordValue
+        }
     }
 }
